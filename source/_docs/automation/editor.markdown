@@ -43,6 +43,13 @@ Don't forget to save your new automation rule. In order for your saved automatio
 
 ## {% linkable_title Updating your configuration to use the editor %}
 
+First check that you have activated the configuration editor.
+
+```yaml
+# Activate the configuration editor
+config:
+```
+
 The automation editor reads and writes to the file `automations.yaml` in your [configuration](/docs/configuration/) folder. Make sure that you have set up the automation component to read from it:
 
 ```yaml
@@ -61,6 +68,8 @@ automation old:
 ## {% linkable_title Migrating your automations to `automations.yaml` %}
 
 If you want to migrate your old automations to use the editor, you'll have to copy them to `automations.yaml`. Make sure that `automations.yaml` remains a list! For each automation that you copy over you'll have to add an `id`. This can be any string as long as it's unique.
+
+For example, the below automation will be triggered when the sun goes from below the horizon to above the horizon. Then, if the temperature is between 17 and 25 degrees, a light will be turned on.
 
 ```yaml
 # Example automations.yaml entry

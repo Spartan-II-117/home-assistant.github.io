@@ -27,7 +27,7 @@ First step is to configure Home Assistant to use the development mode for the fr
 
 ```yaml
 frontend:
-  development_repo: ../home-assistant-polymer
+  development_repo: <absolute path to home-assistant-polymer>
 ```
 
 Next step is to git clone the [home-assistant-polymer repository][hass-polymer]. You can place the repository anywhere on your system but to keep these instructions simple we're cloning the home-assistant-polymer repository as a sibling to the Home Assistant repo.
@@ -79,19 +79,24 @@ $ git push -u <remote name> HEAD
 
 ## {% linkable_title Development %}
 
-While you are developing, you need to have gulp running to watch the source files for changes and build when necessary.
+If you are changing `html` files under `/src` or `/panels` - just reload the page in your browser to see changes.
+If you are changing javascript files under `/js` you need to have gulp running to watch the source files for changes and build when necessary.
 
 ```bash
 $ yarn run dev-watch
 ```
 
-The source code for the frontend can be found in two different directories:
+The source code for the frontend can be found in different directories:
 
  - UI: `/home-assistant-polymer/src/`
  - Panels: `/home-assistant-polymer/panels/`
+ - Javascript code: `/home-assistant-polymer/js/`
 
 # {% linkable_title Building the Polymer frontend %}
 
-Building a new version of the frontend is as simple as running `script/build_frontend`. 
+Building a new version of the frontend is as simple as running `script/build_frontend`.
+To use a built version package it: `python setup.py sdist`
+Install it: `pip3 install dist/home-assistant-frontend-xxxxxxxx.0.tar.gz --upgrade`
+Run Home Assistant without trying to reinstall production package: `hass --skip-pip`
 
 [hass-polymer]: https://github.com/home-assistant/home-assistant-polymer

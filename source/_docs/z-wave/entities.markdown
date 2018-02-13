@@ -25,7 +25,7 @@ This is for a single purpose sensor, multi sensors are explained under Multi Sen
 
 Devices (usually sensors) that support the Alarm command class will create entities starting with `sensor`, and with some generic suffixes, and a suffix that relates to the supported alarm class. For example, the smoke detector `lounge` will have an entity `sensor.lounge_smoke`, and possibly also `sensor.lounge_alarm_type` and `sensor.lounge_alarm_level`. If the device creates a `binary_sensor` entity, it is recommended to use that rather then the `sensor` entity.
 
-### {% linkable_title Alarm Type %}
+### {% linkable_title Alarm Type Entity %}
 
 - **alarm_type**: Reports the type of the sensor
   - **0**: General purpose
@@ -36,7 +36,7 @@ Devices (usually sensors) that support the Alarm command class will create entit
   - **5**: Water leak sensor
   - **6**: Access control
 
-### {% linkable_title Alarm Level %}
+### {% linkable_title Alarm Level Entity %}
 
 The meaning of the `alarm_level` entity depends on the nature of the alarm sensor
 
@@ -111,7 +111,7 @@ The meaning of the `alarm_level` entity depends on the nature of the alarm senso
   - **1**: Wake up
   - **254**: Unknown event
 
-### {% linkable_title Access Control %}
+### {% linkable_title Access Control Entity %}
 
 - **access_control**: These *may* vary between brands
   - **22**: Open
@@ -119,7 +119,7 @@ The meaning of the `alarm_level` entity depends on the nature of the alarm senso
   - **254**: Deep sleep
   - **255**: Case open
 
-If your device has an `access_control` entity, but not a `binary_sensor` equivalent, you can use a [template binary sensor](omponents/binary_sensor.template/) to create one:
+If your device has an `access_control` entity, but not a `binary_sensor` equivalent, you can use a [template binary sensor](/components/binary_sensor.template/) to create one:
 
 ```
 binary_sensor:
@@ -128,14 +128,14 @@ binary_sensor:
       YOUR_SENSOR:
         friendly_name: "Friendly name here"
         value_template: >- 
-          {% raw %}{%- if is_state('sensor.YOUR_SENSOR_access_control', '22') -%}
-          on
+          {% raw %}{%- if is_state('sensor.YOUR_ORIGINAL_SENSOR_access_control', '22') -%}
+          true
           {%- else -%}
-          off
+          false
           {%- endif -%}{% endraw %}
 ```
 
-### {% linkable_title Burglar %}
+### {% linkable_title Burglar Entity %}
 
 - **burglar**: These *may* vary between brands
    - **0**: Not active
@@ -147,7 +147,7 @@ binary_sensor:
    - **254**: Deep sleep
    - **255**: Case open
 
-If your device has an `burglar` entity, but not a `binary_sensor` equivalent, you can use a [template binary sensor](omponents/binary_sensor.template/) to create one:
+If your device has a `burglar` entity, but not a `binary_sensor` equivalent, you can use a [template binary sensor](/components/binary_sensor.template/) to create one:
 
 ```
 binary_sensor:
@@ -157,13 +157,13 @@ binary_sensor:
         friendly_name: "Friendly name here"
         value_template: >-
           {% raw %}{%- if is_state('sensor.YOUR_SENSOR_burglar', '8') -%}
-          on
+          true
           {%- else -%}
-          off
+          false
           {%- endif -%}{% endraw %}
 ```
 
-### {% linkable_title Source Node ID %}
+### {% linkable_title Source Node ID Entity %}
 
 - **sourcenodeid**: Reports the sensor that generated the alarm - this is only valid for Zensor Net based devices
 
